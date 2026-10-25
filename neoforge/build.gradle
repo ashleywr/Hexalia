@@ -93,9 +93,8 @@ processResources {
         expand version: inputs.properties.version
     }
 
-    from(project(":common").file("src/main/resources/data/hexalia/patchouli_books")) {
-        into "data/hexalia/patchouli_books"
-    }
+    from(project(":common").file("src/main/resources"))
+    from(project(":common").file("src/generated/resources"))
 }
 
 shadowJar {

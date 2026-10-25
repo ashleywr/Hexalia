@@ -5,8 +5,7 @@
   "version": 2,
   "creative_tab": "hexalia:hexalia",
   "use_resource_pack": true,
-  "dont_generate_book": true,
-  "custom_book_item": "hexalia:verdant_grimoire",
+  "dont_generate_book": false,
   "show_progress": false,
   "link_hover_color": "a64d79",
   "link_color": "674ea7"
