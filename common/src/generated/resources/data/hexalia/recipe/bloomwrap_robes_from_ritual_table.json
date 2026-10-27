@@ -3,6 +3,7 @@
   "center": {
     "item": "minecraft:leather_chestplate"
   },
+  "energy_cost": 8,
   "offerings": [
     {
       "item": "minecraft:moss_block"
@@ -14,8 +15,9 @@
       "item": "hexalia:silk_fiber"
     },
     {
-      "item": "minecraft:iron_nugget"
+      "item": "hexalia:rabbage"
     }
   ],
-  "output": "hexalia:bloomwrap_robes"
+  "output": "hexalia:bloomwrap_robes",
+  "ritual_kind": "nature"
 }

@@ -1,0 +1,109 @@
+{
+  "name": "Rituales",
+  "icon": "hexalia:ritual_table",
+  "category": "hexalia:core_mechanics",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Rituales compartidos",
+      "text": "La Mesa Ritual permite tres prácticas: $(l:hexalia:core_mechanics/natures_ritual#crops)Rituales de la Naturaleza$(/l), $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Invocación$(/l) y $(l:hexalia:core_mechanics/celestial_infusion)Rituales Celestiales$(/l). Todas usan un catalizador en la Mesa y ofrendas en Braseros Rituales con Sal."
+    },
+    {
+      "type": "text",
+      "title": "Lugar del ritual",
+      "anchor": "structure",
+      "text": "Sitúa los $(l:hexalia:blocks/ritual_brazier)Braseros Rituales$(/l) al nivel de la Mesa, a no más de 8 bloques en horizontal. No necesitan formar un dibujo. Cada ofrenda, incluso las repetidas, requiere su propio Brasero. Añade $(l:hexalia:resources/salt)Sal$(/l) u otra sal compatible a cada uno."
+    },
+    {
+      "type": "text",
+      "title": "Preparación",
+      "anchor": "preparation",
+      "text": "Coloca el catalizador en la Mesa y las ofrendas en Braseros distintos con Sal. Usa un $(l:hexalia:content/tools#hex_focus)Foco Hex$(/l) sobre la Mesa preparada. Solo participan los Braseros que corresponden a la receta."
+    },
+    {
+      "type": "text",
+      "title": "Etapa de las ofrendas",
+      "anchor": "activation",
+      "text": "Durante esta etapa se consumen las ofrendas elegidas y su Sal. Los Braseros permanecen intactos. Si cancelas el ritual después, no recuperarás lo gastado."
+    },
+    {
+      "type": "text",
+      "title": "Rituales de la Naturaleza",
+      "anchor": "crops",
+      "text": "Cada Ritual de la Naturaleza requiere cierta cantidad de cultivos maduros cercanos. Deben seguir maduros hasta que el ritual tenga éxito; entonces los cultivos elegidos vuelven a una fase temprana y el catalizador se transforma."
+    },
+    {
+      "type": "text",
+      "title": "Resultado natural",
+      "anchor": "result",
+      "text": "La energía de los cultivos solo se gasta cuando un Ritual de la Naturaleza tiene éxito. Si se detiene después de aceptar las ofrendas, estas y su Sal se pierden, pero los cultivos no retroceden."
+    },
+    {
+      "type": "text",
+      "title": "Invocación",
+      "anchor": "sacrifice",
+      "text": "La Invocación usa la misma Mesa y ofrendas, además de cultivos maduros cercanos y un alma. Tras aceptar las ofrendas, espera a que derrotes una criatura viva cercana con un $(l:hexalia:content/tools#athame)Athame$(/l). Los cultivos elegidos solo retroceden cuando aparece la criatura invocada."
+    },
+    {
+      "type": "text",
+      "title": "Si no comienza",
+      "text": "Revisa el catalizador, las ofrendas separadas, la Sal compatible y la fuente de energía de la receta. La Invocación pide el alma después de las ofrendas. Los Rituales Celestiales requieren noche y Flores Celestiales vivas."
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:air_node_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:astrylis_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:earth_node_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:fire_node_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:morphora_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:water_node_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:heartseed_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:cinderhew_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:sage_pendant_from_ritual_table",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:summon_silk_moth",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:summon_cacofey",
+      "layout": "ritual_table"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "name": "Ritual Celestial",
+  "icon": "hexalia:ritual_table",
+  "category": "hexalia:core_mechanics",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Ritual Celestial",
+      "text": "Un Ritual Celestial usa la $(l:hexalia:core_mechanics/natures_ritual#structure)preparación ritual compartida$(/l), pero obtiene energía de Flores Celestiales cercanas en lugar de cultivos. Debe comenzar de noche."
+    },
+    {
+      "type": "text",
+      "title": "Requisitos",
+      "anchor": "requirements",
+      "text": "Mantén cerca de la Mesa, a su misma altura, la cantidad de $(l:hexalia:resources/herbs#celestial_bloom)Flores Celestiales$(/l) vivas indicada en cada receta. Tanto las frescas como las marchitas aportan energía."
+    },
+    {
+      "type": "text",
+      "title": "Proceso",
+      "anchor": "process",
+      "text": "De noche, usa el Foco Hex sobre la Mesa preparada. Las ofrendas elegidas y su Sal se gastan durante la etapa de las ofrendas; los Braseros permanecen. Si cancelas después, no recuperarás lo gastado."
+    },
+    {
+      "type": "text",
+      "title": "Transformación",
+      "anchor": "results",
+      "text": "Al completarse, el catalizador se transforma y cada Flor elegida pierde una fase: fresca a marchita, o marchita a arbusto muerto. Cancelar antes del éxito no degrada las Flores."
+    },
+    {
+      "type": "text",
+      "title": "Uso",
+      "text": "Cada receta muestra cuántas Flores necesita. Galeberries y Cristales Celestiales abren este camino; las mejoras Moonweave usan el mismo ritual con sus propios requisitos."
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:celestial_crystal_from_celestial_infusion",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:galeberries_from_celestial_infusion",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:moonweave_bindings_from_celestial_infusion",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:moonweave_footwraps_from_celestial_infusion",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:moonweave_hood_from_celestial_infusion",
+      "layout": "ritual_table"
+    },
+    {
+      "type": "hexalia:recipe_page",
+      "recipe_id": "hexalia:moonweave_mantle_from_celestial_infusion",
+      "layout": "ritual_table"
+    }
+  ]
+}

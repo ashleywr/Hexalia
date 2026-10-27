@@ -15,6 +15,7 @@ import net.astralya.hexalia.compat.jei.category.SmallCauldronJeiCategory;
 import net.astralya.hexalia.compat.jei.util.JeiRecipeLookup;
 import net.astralya.hexalia.item.ModItems;
 import net.astralya.hexalia.recipe.ModRecipeTypes;
+import net.astralya.hexalia.recipe.NaturesRitualRecipe;
 import net.minecraft.resources.ResourceLocation;
 
 @JeiPlugin
@@ -33,8 +34,13 @@ public final class HexaliaJeiPlugin implements IModPlugin {
     registration.addRecipeCategories(
         new MortarAndPestleJeiCategory(guiHelper),
         new SmallCauldronJeiCategory(guiHelper),
-        new NaturesRitualJeiCategory(guiHelper),
+        new NaturesRitualJeiCategory(
+            guiHelper, HexaliaJeiRecipeTypes.NATURES_RITUAL, "jei.hexalia.category.natures_ritual"),
         new CelestialInfusionJeiCategory(guiHelper),
+        new NaturesRitualJeiCategory(
+            guiHelper,
+            HexaliaJeiRecipeTypes.SUMMONING_RITUAL,
+            "jei.hexalia.category.summoning_ritual"),
         new MutationJeiCategory(guiHelper));
   }
 
@@ -48,10 +54,19 @@ public final class HexaliaJeiPlugin implements IModPlugin {
         JeiRecipeLookup.getRecipes(ModRecipeTypes.SMALL_CAULDRON.get()));
     registration.addRecipes(
         HexaliaJeiRecipeTypes.NATURES_RITUAL,
-        JeiRecipeLookup.getRecipes(ModRecipeTypes.NATURES_RITUAL.get()));
+        JeiRecipeLookup.getRecipes(ModRecipeTypes.NATURES_RITUAL.get()).stream()
+            .filter(recipe -> recipe.ritualKind() == NaturesRitualRecipe.RitualKind.NATURE)
+            .toList());
     registration.addRecipes(
-        HexaliaJeiRecipeTypes.CELESTIAL_INFUSION,
-        JeiRecipeLookup.getRecipes(ModRecipeTypes.CELESTIAL_INFUSION.get()));
+        HexaliaJeiRecipeTypes.CELESTIAL_RITUAL,
+        JeiRecipeLookup.getRecipes(ModRecipeTypes.NATURES_RITUAL.get()).stream()
+            .filter(recipe -> recipe.ritualKind() == NaturesRitualRecipe.RitualKind.CELESTIAL)
+            .toList());
+    registration.addRecipes(
+        HexaliaJeiRecipeTypes.SUMMONING_RITUAL,
+        JeiRecipeLookup.getRecipes(ModRecipeTypes.NATURES_RITUAL.get()).stream()
+            .filter(recipe -> recipe.ritualKind() == NaturesRitualRecipe.RitualKind.SUMMONING)
+            .toList());
     registration.addRecipes(
         HexaliaJeiRecipeTypes.MUTATION, JeiRecipeLookup.getRecipes(ModRecipeTypes.MUTATION.get()));
   }
@@ -68,11 +83,17 @@ public final class HexaliaJeiPlugin implements IModPlugin {
         ModItems.RITUAL_BRAZIER.get(), HexaliaJeiRecipeTypes.NATURES_RITUAL);
     registration.addRecipeCatalyst(ModItems.HEX_FOCUS.get(), HexaliaJeiRecipeTypes.NATURES_RITUAL);
     registration.addRecipeCatalyst(
-        ModItems.RITUAL_BRAZIER.get(), HexaliaJeiRecipeTypes.CELESTIAL_INFUSION);
+        ModItems.RITUAL_TABLE.get(), HexaliaJeiRecipeTypes.CELESTIAL_RITUAL);
     registration.addRecipeCatalyst(
-        ModItems.CELESTIAL_CRYSTAL.get(), HexaliaJeiRecipeTypes.CELESTIAL_INFUSION);
+        ModItems.CELESTIAL_CRYSTAL.get(), HexaliaJeiRecipeTypes.CELESTIAL_RITUAL);
     registration.addRecipeCatalyst(
-        ModItems.HEX_FOCUS.get(), HexaliaJeiRecipeTypes.CELESTIAL_INFUSION);
+        ModItems.HEX_FOCUS.get(), HexaliaJeiRecipeTypes.CELESTIAL_RITUAL);
+    registration.addRecipeCatalyst(
+        ModItems.RITUAL_TABLE.get(), HexaliaJeiRecipeTypes.SUMMONING_RITUAL);
+    registration.addRecipeCatalyst(
+        ModItems.RITUAL_BRAZIER.get(), HexaliaJeiRecipeTypes.SUMMONING_RITUAL);
+    registration.addRecipeCatalyst(
+        ModItems.HEX_FOCUS.get(), HexaliaJeiRecipeTypes.SUMMONING_RITUAL);
     registration.addRecipeCatalyst(ModItems.MUTAVIS.get(), HexaliaJeiRecipeTypes.MUTATION);
   }
 }

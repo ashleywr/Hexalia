@@ -1,0 +1,42 @@
+{
+  "name": "Polilla de Seda",
+  "icon": "hexalia:silk_moth_spawn_egg",
+  "category": "hexalia:entities",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "text",
+      "title": "Polillas de Seda",
+      "text": "Las Polillas de Seda viven en los bosques e inician el camino hacia el equipo de seda. También se pueden obtener mediante $(l:hexalia:core_mechanics/natures_ritual#sacrifice)Invocación$(/l), que requiere un alma ofrecida con el Athame."
+    },
+    {
+      "type": "text",
+      "title": "Comportamiento",
+      "anchor": "behavior",
+      "text": "Las Polillas de Seda se acercan a las luces cercanas. También deambulan y descansan de vez en cuando; hay distintas variedades en libertad."
+    },
+    {
+      "type": "text",
+      "title": "Cría",
+      "anchor": "breeding",
+      "text": "Críalas con Néctar Fragante, preparado en el $(l:hexalia:core_mechanics/mortar_and_pestle)Mortero y Maja$(/l)."
+    },
+    {
+      "type": "text",
+      "title": "Ciclo vital",
+      "anchor": "lifecycle",
+      "text": "Las polillas ponen huevos sobre hojas o Bloques Nido. Cada puesta produce dos gusanos de seda, que puedes colocar sobre troncos para formar capullos."
+    },
+    {
+      "type": "text",
+      "title": "Capullos",
+      "text": "Los capullos también aparecen en ciertos árboles. Rómpelos para liberar un gusano, o usa sobre ellos un bloque que emita luz para obtener una Polilla de Seda."
+    },
+    {
+      "type": "text",
+      "title": "Recursos de seda",
+      "anchor": "resources",
+      "text": "El ciclo de las polillas da Fibra de Seda. Úsala para fabricar $(l:hexalia:content/equipment_armor#silkweave)Silkweave$(/l) y mejora ese equipo a $(l:hexalia:content/equipment_armor#moonweave)Moonweave$(/l) mediante $(l:hexalia:core_mechanics/celestial_infusion)Rituales Celestiales$(/l)."
+    }
+  ]
+}

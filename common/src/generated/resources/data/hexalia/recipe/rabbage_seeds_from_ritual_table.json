@@ -3,19 +3,21 @@
   "center": {
     "item": "minecraft:beetroot_seeds"
   },
+  "energy_cost": 4,
   "offerings": [
     {
       "item": "hexalia:dream_paste"
-    },
-    {
-      "item": "minecraft:iron_nugget"
     },
     {
       "item": "minecraft:sweet_berries"
     },
     {
       "item": "minecraft:poppy"
+    },
+    {
+      "item": "minecraft:bone_meal"
     }
   ],
-  "output": "hexalia:rabbage_seeds"
+  "output": "hexalia:rabbage_seeds",
+  "ritual_kind": "nature"
 }

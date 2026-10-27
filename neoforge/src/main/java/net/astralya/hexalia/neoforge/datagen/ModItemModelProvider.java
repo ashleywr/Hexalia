@@ -15,7 +15,7 @@ public final class ModItemModelProvider extends ItemModelProvider {
 
   @Override
   protected void registerModels() {
-    basicItem(ModItems.HEX_FOCUS.get());
+    handheldItem(ModItems.HEX_FOCUS.get());
     basicItem(ModItems.SALT.get());
     basicItem(ModItems.TREE_RESIN.get());
     basicItem(ModItems.SILK_FIBER.get());
@@ -30,7 +30,7 @@ public final class ModItemModelProvider extends ItemModelProvider {
     basicItem(ModItems.WATER_NODE.get());
     basicItem(ModItems.AIR_NODE.get());
     basicItem(ModItems.EARTH_NODE.get());
-    basicItem(ModItems.LADLE.get());
+    handheldItem(ModItems.LADLE.get());
     handheldItem(ModItems.ATHAME.get());
     handheldItem(ModItems.KELPWEAVE_BLADE.get());
     handheldItem(ModItems.CINDERHEW.get());
@@ -96,9 +96,9 @@ public final class ModItemModelProvider extends ItemModelProvider {
     blockTextureItem(ModItems.SPIRIT_BLOOM.get());
     blockTextureItem(ModItems.DREAMSHROOM.get());
     blockTextureItem(ModItems.GHOST_FERN.get());
-    blockTextureItem(ModItems.CELESTIAL_BLOOM.get());
+    closedCelestialBloomItem(ModItems.CELESTIAL_BLOOM.get());
     blockTextureItem(ModItems.WITCHWEED.get());
-    blockTextureItem(ModItems.WITHERED_CELESTIAL_BLOOM.get());
+    closedCelestialBloomItem(ModItems.WITHERED_CELESTIAL_BLOOM.get());
     basicItem(ModItems.MUTAVIS.get());
     basicItem(ModItems.MORTAR_AND_PESTLE.get());
     basicItem(ModItems.MANDRAKE.get());
@@ -137,5 +137,12 @@ public final class ModItemModelProvider extends ItemModelProvider {
     getBuilder(name)
         .parent(getExistingFile(mcLoc("item/generated")))
         .texture("layer0", modLoc("block/" + name));
+  }
+
+  private void closedCelestialBloomItem(Item item) {
+    String name = BuiltInRegistries.ITEM.getKey(item).getPath();
+    getBuilder(name)
+        .parent(getExistingFile(mcLoc("item/generated")))
+        .texture("layer0", modLoc("block/" + name + "_closed"));
   }
 }

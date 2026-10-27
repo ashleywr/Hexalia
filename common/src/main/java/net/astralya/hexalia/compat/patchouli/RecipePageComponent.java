@@ -4,16 +4,18 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.UnaryOperator;
 import net.astralya.hexalia.Hexalia;
-import net.astralya.hexalia.recipe.CelestialInfusionRecipe;
+import net.astralya.hexalia.compat.RitualEnergyViewerIndicator;
 import net.astralya.hexalia.recipe.MortarAndPestleRecipe;
 import net.astralya.hexalia.recipe.MutationRecipe;
 import net.astralya.hexalia.recipe.NaturesRitualRecipe;
 import net.astralya.hexalia.recipe.SmallCauldronRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
 import vazkii.patchouli.api.IComponentRenderContext;
@@ -28,8 +30,6 @@ public class RecipePageComponent implements ICustomComponent {
       ResourceLocation.fromNamespaceAndPath(Hexalia.MOD_ID, "textures/gui/mutation_gui.png");
   private static final ResourceLocation MORTAR_TEXTURE =
       ResourceLocation.fromNamespaceAndPath(Hexalia.MOD_ID, "textures/gui/mortar_gui.png");
-  private static final ResourceLocation RITUAL_BRAZIER_TEXTURE =
-      ResourceLocation.fromNamespaceAndPath(Hexalia.MOD_ID, "textures/gui/ritual_brazier_gui.png");
   private static final ResourceLocation RITUAL_TABLE_TEXTURE =
       ResourceLocation.fromNamespaceAndPath(Hexalia.MOD_ID, "textures/gui/ritual_table_gui.png");
   private static final ResourceLocation SMALL_CAULDRON_TEXTURE =
@@ -94,8 +94,7 @@ public class RecipePageComponent implements ICustomComponent {
       case "ritual_table" -> renderRitualTable(graphics, context, currentRecipe, mouseX, mouseY);
       case "mortar_and_pestle" -> renderMortar(graphics, context, currentRecipe, mouseX, mouseY);
       case "mutation" -> renderMutation(graphics, context, currentRecipe, mouseX, mouseY);
-      case "ritual_brazier" ->
-          renderRitualBrazier(graphics, context, currentRecipe, mouseX, mouseY);
+      case "ritual_brazier" -> renderRitualTable(graphics, context, currentRecipe, mouseX, mouseY);
       default ->
           graphics.drawString(
               Minecraft.getInstance().font,
@@ -174,25 +173,6 @@ public class RecipePageComponent implements ICustomComponent {
         currentRecipe.output);
   }
 
-  private void renderRitualBrazier(
-      GuiGraphics graphics,
-      IComponentRenderContext context,
-      RecipeView currentRecipe,
-      int mouseX,
-      int mouseY) {
-    int left = centeredX(118);
-    int top = y + 18;
-    graphics.blit(RITUAL_BRAZIER_TEXTURE, left, top, 0, 0, 118, 80, 256, 256);
-    renderIngredient(graphics, context, currentRecipe, 0, left + 27, top + 30, mouseX, mouseY);
-    context.renderItemStack(
-        graphics,
-        left + 88 + ITEM_OFFSET_X,
-        top + 30 + ITEM_OFFSET_Y,
-        mouseX,
-        mouseY,
-        currentRecipe.output);
-  }
-
   private void renderRitualTable(
       GuiGraphics graphics,
       IComponentRenderContext context,
@@ -226,6 +206,29 @@ public class RecipePageComponent implements ICustomComponent {
           mouseX,
           mouseY,
           currentRecipe.output);
+    }
+    if (currentRecipe.energy() != null) {
+      RitualEnergyViewerIndicator energy = currentRecipe.energy();
+      if (!energy.icons().isEmpty()) {
+        ItemStack icon =
+            energy.icons().get((int) ((System.currentTimeMillis() / 1000) % energy.icons().size()));
+        context.renderItemStack(graphics, left + 4, top + 86, mouseX, mouseY, icon);
+      }
+      graphics.drawString(
+          Minecraft.getInstance().font, energy.firstLine(), left + 24, top + 86, 0xFF706C77, false);
+      graphics.drawString(
+          Minecraft.getInstance().font,
+          energy.secondLine(),
+          left + 24,
+          top + 97,
+          0xFF706C77,
+          false);
+      if (mouseX >= left + 4
+          && mouseX < left + 114
+          && mouseY >= top + RitualEnergyViewerIndicator.Y
+          && mouseY < top + RitualEnergyViewerIndicator.Y + RitualEnergyViewerIndicator.HEIGHT)
+        graphics.renderComponentTooltip(
+            Minecraft.getInstance().font, energy.tooltip(), mouseX, mouseY);
     }
   }
 
@@ -281,13 +284,11 @@ public class RecipePageComponent implements ICustomComponent {
       case "ritual_brazier" ->
           manager
               .byKey(id)
-              .filter(holder -> holder.value() instanceof CelestialInfusionRecipe)
+              .filter(holder -> holder.value() instanceof NaturesRitualRecipe)
               .map(
                   holder -> {
-                    CelestialInfusionRecipe recipe = (CelestialInfusionRecipe) holder.value();
-                    return new RecipeView(
-                        List.copyOf(recipe.getIngredients()),
-                        recipe.getResultItem(client.level.registryAccess()).copy());
+                    NaturesRitualRecipe value = (NaturesRitualRecipe) holder.value();
+                    return new RecipeView(List.copyOf(value.ingredients()), value.itemResult());
                   });
       case "mutation" ->
           manager
@@ -318,7 +319,16 @@ public class RecipePageComponent implements ICustomComponent {
               .map(
                   holder -> {
                     NaturesRitualRecipe recipe = (NaturesRitualRecipe) holder.value();
-                    ItemStack output = recipe.getResultItem(client.level.registryAccess()).copy();
+                    ItemStack output =
+                        recipe
+                            .entityResult()
+                            .flatMap(
+                                result ->
+                                    BuiltInRegistries.ENTITY_TYPE.getOptional(result.entity()))
+                            .map(SpawnEggItem::byId)
+                            .map(SpawnEggItem::getDefaultInstance)
+                            .orElseGet(
+                                () -> recipe.getResultItem(client.level.registryAccess()).copy());
                     Component title =
                         recipe
                             .entityResult()
@@ -326,15 +336,23 @@ public class RecipePageComponent implements ICustomComponent {
                                 result ->
                                     Component.translatable(result.entity().toLanguageKey("entity")))
                             .orElseGet(output::getHoverName);
-                    return new RecipeView(List.copyOf(recipe.getIngredients()), output, title);
+                    return new RecipeView(
+                        List.copyOf(recipe.getIngredients()),
+                        output,
+                        title,
+                        RitualEnergyViewerIndicator.of(recipe));
                   });
       default -> Optional.empty();
     };
   }
 
-  private record RecipeView(List<Ingredient> ingredients, ItemStack output, Component title) {
+  private record RecipeView(
+      List<Ingredient> ingredients,
+      ItemStack output,
+      Component title,
+      RitualEnergyViewerIndicator energy) {
     private RecipeView(List<Ingredient> ingredients, ItemStack output) {
-      this(ingredients, output, output.getHoverName());
+      this(ingredients, output, output.getHoverName(), null);
     }
   }
 }

@@ -157,7 +157,6 @@ public final class ModItemTagProvider extends ItemTagsProvider {
         .add(ModItems.CINDERHEW.get())
         .add(ModItems.BRIAR_SICKLE.get())
         .add(ModItems.SPIRITROOT_TETHER.get())
-        .add(ModItems.SAGE_PENDANT.get())
         .add(ModItems.PURIFYING_SAC.get())
         .add(ModItems.THORNBOW.get())
         .add(ModItems.EARPLUGS.get())
@@ -231,7 +230,7 @@ public final class ModItemTagProvider extends ItemTagsProvider {
         .add(ModItems.BREW_OF_HOLLOW_SILENCE.get())
         .add(ModItems.RUSTIC_BOTTLE.get());
 
-    tag(ModTags.Items.SALT).add(ModItems.SALT.get());
+    tag(ModTags.Items.SALT).add(ModItems.SALT.get()).addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "salt")).addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "dusts/salt"));
     tag(ModTags.Items.SALT_BLOCKS).add(ModItems.SALT_BLOCK.get());
     tag(ModTags.Items.MUSHROOMS)
         .add(ModBlocks.DREAMSHROOM.get().asItem())

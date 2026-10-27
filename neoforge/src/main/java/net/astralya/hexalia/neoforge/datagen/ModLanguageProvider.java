@@ -361,7 +361,9 @@ public final class ModLanguageProvider extends LanguageProvider {
     add("tooltip.hexalia.hold_shift", "Hold SHIFT for more information");
 
     add("tooltip.hexalia.accessory.earplugs", "Protects against a Mandrake's stunning cry.");
-    add("tooltip.hexalia.accessory.sage_pendant", "Increases experience gained.");
+    add("tooltip.hexalia.accessory.sage_pendant", "Stores 25% extra Experience gained.");
+    add("tooltip.hexalia.sage_pendant.stored_experience", "Stored Experience: %s / %s");
+    add("tooltip.hexalia.sage_pendant.release", "Shift + Right-click to absorb stored Experience");
     add("tooltip.hexalia.accessory.seafoam_talisman", "Helps you breathe while underwater.");
     add("tooltip.hexalia.accessory.moonward_ring", "Protects against Darkness and Blindness.");
     add("tooltip.hexalia.accessory.witchheart_cluster", "Grants two extra hearts.");
@@ -395,8 +397,15 @@ public final class ModLanguageProvider extends LanguageProvider {
     add("tooltip.hexalia.magic_resist_piece", "Magic Resistance: +%s");
     add("tooltip.hexalia.magic_resist_full_set", "Full Set: +%s Magic Resistance");
 
-    add("tooltip.hexalia.spiritroot_tether", "Bound Spirit: %s");
-    add("tooltip.hexalia.spiritroot_tether.bound", "Bound to: %s, %s, %s");
+    add("tooltip.hexalia.spiritroot_tether", "Contains: %s");
+    add("tooltip.hexalia.spiritroot_tether.bound", "Bound to: %s");
+    add("tooltip.hexalia.spiritroot_tether.dimension.end", "The End");
+    add("tooltip.hexalia.spiritroot_tether.dimension.nether", "The Nether");
+    add("tooltip.hexalia.spiritroot_tether.dimension.overworld", "Overworld");
+    add("tooltip.hexalia.spiritroot_tether.flavor", "A thread for binding wandering souls");
+    add("tooltip.hexalia.spiritroot_tether.position", "%s (%s)");
+    add("tooltip.hexalia.spiritroot_tether.release", "Right-click to release %s");
+    add("tooltip.hexalia.spiritroot_tether.remote_release", "Shift + Right-click to release %s at %s");
     add("tooltip.hexalia.spiritroot_tether.unknown", "Unknown");
 
     add("tooltip.hexalia.rootshaper.mode_3x3_active", "3×3 Mining: Active");
@@ -441,10 +450,6 @@ public final class ModLanguageProvider extends LanguageProvider {
             "There are not enough Celestial Blooms nearby.");
 
     add(
-            "message.hexalia.ritual_brazier.no_sky",
-            "The infusion requires an open view of the sky.");
-
-    add(
             "message.hexalia.celestial_infusion.invalid_item",
             "The item placed on the brazier cannot be infused.");
 
@@ -452,9 +457,8 @@ public final class ModLanguageProvider extends LanguageProvider {
             "message.hexalia.celestial_infusion.no_celestial_blooms",
             "There are not enough Celestial Blooms nearby.");
 
-    add(
-            "message.hexalia.celestial_infusion.no_sky",
-            "The infusion requires an open view of the sky.");
+    add("message.hexalia.celestial_infusion.requires_night",
+            "Celestial Infusion requires nighttime.");
 
     add(
             "message.hexalia.censer_not_full",
@@ -474,7 +478,7 @@ public final class ModLanguageProvider extends LanguageProvider {
 
     add(
             "message.hexalia.censer.ethereal_grazing",
-            "A pale tranquility settles over the herd, and life renews itself without need");
+            "Spectral Allure settles over the herd, and life renews itself without need");
 
     add(
             "message.hexalia.censer.miners_respite",
@@ -662,7 +666,7 @@ public final class ModLanguageProvider extends LanguageProvider {
     add("advancements.hexalia.wise_investment.title", "Pendant Pending");
     add(
             "advancements.hexalia.wise_investment.description",
-            "Obtain the Sage Pendant and profit in XP.");
+            "Obtain a Sage Pendant that stores Experience.");
 
     add("advancements.hexalia.herb_nerd.title", "Leaf It to Me");
     add(
@@ -751,7 +755,8 @@ public final class ModLanguageProvider extends LanguageProvider {
     add("jei.hexalia.category.mortar_and_pestle", "Mortar & Pestle");
     add("jei.hexalia.category.small_cauldron", "Small Cauldron Brewing");
     add("jei.hexalia.category.natures_ritual", "Nature's Ritual");
-    add("jei.hexalia.category.celestial_infusion", "Celestial Infusion");
+    add("jei.hexalia.category.celestial_ritual", "Celestial Ritual");
+    add("jei.hexalia.category.summoning_ritual", "Summoning Ritual");
     add("jei.hexalia.category.mutation", "Mutation");
 
     add("jei.hexalia.tooltip.brew_time", "Brew Time: %s ticks");
@@ -774,12 +779,23 @@ public final class ModLanguageProvider extends LanguageProvider {
             "Requires nearby Celestial Blooms.");
 
     add(
-            "jei.hexalia.tooltip.requires_open_sky",
-            "Requires an open view of the sky.");
-
-    add(
             "jei.hexalia.tooltip.requires_mature_crops",
             "Requires mature crops nearby.");
+
+    add("jei.hexalia.energy.crop_short", "%s Mature Crops");
+    add("jei.hexalia.energy.bloom_short", "%s Celestial Blooms");
+    add("jei.hexalia.energy.nearby", "Nearby");
+    add("jei.hexalia.energy.crop_label", "%s Mature Crops Nearby");
+    add("jei.hexalia.energy.crop_title", "Ritual Energy");
+    add("jei.hexalia.energy.crop_requirement", "Requires %s fully grown crops nearby.");
+    add("jei.hexalia.energy.crop_effect", "Selected crops return to their first growth stage when the ritual succeeds.");
+    add("jei.hexalia.energy.bloom_label", "%s Celestial Blooms Nearby");
+    add("jei.hexalia.energy.bloom_title", "Celestial Energy");
+    add("jei.hexalia.energy.bloom_requirement", "Requires %s Celestial Blooms nearby.");
+    add("jei.hexalia.energy.bloom_effect", "Each selected Bloom loses one stage when the ritual succeeds.");
+
+    add("jei.hexalia.tooltip.crop_cost", "Requires %s mature crops.");
+    add("jei.hexalia.tooltip.bloom_cost", "Requires %s living Celestial Blooms.");
 
     add(
             "jei.info.wild_sunfire_tomatoes",
@@ -817,8 +833,10 @@ public final class ModLanguageProvider extends LanguageProvider {
   private void addEmiTranslations() {
     add("emi.category.hexalia.mutation", "Mutation");
     add("emi.category.hexalia.mortar_and_pestle", "Mortar and Pestle");
+    add("emi.category.hexalia.celestial_ritual", "Celestial Ritual");
+    add("emi.category.hexalia.summoning_ritual", "Summoning Ritual");
     add("emi.category.hexalia.ritual_brazier", "Ritual Brazier");
-    add("emi.category.hexalia.ritual_table", "Ritual Table");
+    add("emi.category.hexalia.natures_ritual", "Nature's Ritual");
     add("emi.category.hexalia.small_cauldron", "Small Cauldron");
   }
 
@@ -890,9 +908,9 @@ public final class ModLanguageProvider extends LanguageProvider {
             "A detailed book is your trusted tool in matters of witchcraft and plant care.");
 
     add("sounds.hexalia.mandrake_scream", "Mandrake screamed");
-    add("sounds.hexalia.ritual_success", "Ritual completed");
     add("sounds.hexalia.conversion", "Block converted");
     add("sounds.hexalia.sac_impact", "Sac hits the ground");
     add("sounds.hexalia.cacofey_giggle", "Cacofey giggling");
+    add("sounds.hexalia.ritual_whispers", "Ritual whispers");
   }
 }
